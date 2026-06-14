@@ -1,0 +1,44 @@
+<idea-plugin>
+    <id>com.semanticpilot</id>
+
+    <name>SemanticPilot</name>
+
+    <vendor email="anshuman.nayak7183@gmail.com">
+        SemanticPilot
+    </vendor>
+
+    <description><![CDATA[
+        <p>
+            SemanticPilot is an AI-powered coding assistant for JetBrains IDEs,
+            providing semantic context understanding and intelligent code completion.
+        </p>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+
+        <toolWindow
+                id="SemanticPilot"
+                factoryClass="com.semanticpilot.toolWindow.SemanticPilotToolWindowFactory"/>
+
+        <postStartupActivity
+                implementation="com.semanticpilot.startup.SemanticPilotProjectActivity"/>
+
+    </extensions>
+
+    <actions>
+
+    <action
+            id="SemanticPilot.TestContextAction"
+            class="com.semanticpilot.actions.TestContextAction"
+            text="Test Context">
+
+        <add-to-group
+                group-id="ToolsMenu"
+                anchor="last"/>
+    </action>
+
+</actions>
+
+</idea-plugin>

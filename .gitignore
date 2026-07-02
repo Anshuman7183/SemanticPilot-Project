@@ -1,0 +1,45 @@
+# Gradle
+.gradle/
+build/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# IntelliJ Platform Sandbox
+.intellijPlatform/
+
+# JetBrains generated
+run/
+sandbox/
+
+# Kotlin
+out/
+
+# Logs
+logs/
+*.log
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp/
+temp/
+
+# Local configuration
+local.properties
+.env
+.env.*
+
+# Archives
+*.zip
+*.jar
+
+# Crash reports
+hs_err_pid*
+replay_pid*

@@ -212,9 +212,3 @@ uvicorn app.main:app --reload
 
 B.Tech Computer Science Engineering  
 VIT Bhopal University
-
----
-
-## License
-
-MIT License

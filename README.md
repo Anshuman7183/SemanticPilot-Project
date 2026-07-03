@@ -444,7 +444,7 @@ Possible next steps:
 
 ---
 
-## Resume Summary
+## Summary
 
 SemanticPilot can be summarized as:
 

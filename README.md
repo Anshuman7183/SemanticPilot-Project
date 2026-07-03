@@ -4,7 +4,7 @@ SemanticPilot is a JetBrains IDE coding assistant prototype that shows AI-genera
 
 I built this project to understand how Copilot-style developer tools work under the hood: editor listeners, cursor context extraction, PSI-based semantic analysis, backend orchestration, LLM completion, inline rendering, and TAB-based acceptance.
 
-The current version is a working resume/demo project, not a production Marketplace plugin.
+The current version is a working demo project, not a production Marketplace plugin.
 
 ---
 

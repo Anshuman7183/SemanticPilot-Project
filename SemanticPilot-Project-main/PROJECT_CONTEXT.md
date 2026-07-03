@@ -405,7 +405,7 @@ Current objective:
 
 Status:
 
-⚠ In Progress
+✅ Completed
 
 ---
 
@@ -431,7 +431,7 @@ Deliverables:
 
 Status:
 
-⬜ Not Started
+✅ Completed
 
 ---
 
@@ -467,7 +467,7 @@ becomes:
 
 Status:
 
-⬜ Not Started
+✅ Completed
 
 ---
 
@@ -501,7 +501,7 @@ Deliverables:
 
 Status:
 
-⬜ Not Started
+✅ Completed
 
 ---
 
@@ -519,7 +519,7 @@ Deliverables:
 
 Status:
 
-⬜ Not Started
+✅ Completed
 
 ---
 
@@ -550,7 +550,7 @@ Render completion
 
 Status:
 
-⬜ Not Started
+✅ Completed
 
 ---
 
@@ -588,7 +588,7 @@ Ghost Text
 
 Status:
 
-⬜ Not Started
+⚠ In Progress
 
 ---
 

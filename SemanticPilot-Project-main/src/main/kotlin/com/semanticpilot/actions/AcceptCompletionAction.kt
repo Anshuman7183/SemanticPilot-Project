@@ -7,6 +7,22 @@ import com.semanticpilot.completion.InlineGhostTextRenderer
 
 class AcceptCompletionAction : AnAction() {
 
+    override fun update(
+        e: AnActionEvent
+    ) {
+
+        val editor =
+            e.getData(
+                CommonDataKeys.EDITOR
+            )
+
+        e.presentation.isEnabled =
+            editor != null &&
+                InlineGhostTextRenderer.hasSuggestion(
+                    editor
+                )
+    }
+
     override fun actionPerformed(
         e: AnActionEvent
     ) {

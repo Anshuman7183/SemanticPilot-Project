@@ -1,5 +1,6 @@
 package com.semanticpilot.services
 
+import com.intellij.openapi.application.ReadAction
 import com.intellij.openapi.editor.Editor
 import com.semanticpilot.models.CompletionResponse
 import com.semanticpilot.network.ApiClient
@@ -15,7 +16,9 @@ class CompletionService {
         println("STEP 1")
 
         val request =
-            contextService.buildRequest(editor)
+            ReadAction.compute<_, RuntimeException> {
+                contextService.buildRequest(editor)
+            }
 
         println("STEP 2")
 

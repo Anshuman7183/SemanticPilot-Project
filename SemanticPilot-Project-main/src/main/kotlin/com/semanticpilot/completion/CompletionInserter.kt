@@ -11,13 +11,24 @@ object CompletionInserter {
         response: CompletionResponse
     ) {
 
+        insert(
+            editor,
+            response.completion
+        )
+    }
+
+    fun insert(
+        editor: Editor,
+        completion: String
+    ) {
+
         WriteCommandAction.runWriteCommandAction(
             editor.project
         ) {
 
             editor.document.insertString(
                 editor.caretModel.offset,
-                response.completion
+                completion
             )
         }
     }

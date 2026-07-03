@@ -8,5 +8,6 @@ data class CompletionRequest(
     val suffix: String,
     val selectedText: String,
     val language: String,
-    val fileContent: String
+    val fileContent: String,
+    val semanticContext: SemanticContext? = null
 )

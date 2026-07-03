@@ -1,16 +1,19 @@
 package com.semanticpilot.completion
 
-import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.editor.Editor
-import com.intellij.openapi.editor.Inlay
 import com.intellij.openapi.editor.EditorCustomElementRenderer
+import com.intellij.openapi.editor.Inlay
 import com.intellij.openapi.editor.colors.EditorFontType
 import com.intellij.openapi.editor.markup.TextAttributes
-import java.awt.Color
+import com.intellij.ui.JBColor
 import java.awt.Graphics
+import java.awt.Graphics2D
 import java.awt.Rectangle
+import java.awt.RenderingHints
 
 object InlineGhostTextRenderer {
+
+    private var currentEditor: Editor? = null
 
     private var currentInlay: Inlay<*>? = null
 
@@ -23,14 +26,27 @@ object InlineGhostTextRenderer {
 
         clear()
 
+        if (suggestion.isBlank()) {
+            return
+        }
+
+        val displayText =
+            suggestion.toInlinePreview()
+
         currentSuggestion = suggestion
+
+        currentEditor = editor
 
         currentInlay =
             editor.inlayModel.addInlineElement(
                 editor.caretModel.offset,
                 true,
-                GhostRenderer(suggestion)
+                GhostRenderer(displayText)
             )
+
+        currentInlay?.update()
+
+        editor.contentComponent.repaint()
     }
 
     fun accept(editor: Editor) {
@@ -38,16 +54,23 @@ object InlineGhostTextRenderer {
         val suggestion =
             currentSuggestion ?: return
 
-        WriteCommandAction.runWriteCommandAction(
-            editor.project
-        ) {
-            editor.document.insertString(
-                editor.caretModel.offset,
-                suggestion
-            )
+        if (!hasSuggestion(editor)) {
+            return
         }
 
+        CompletionInserter.insert(
+            editor,
+            suggestion
+        )
+
         clear()
+    }
+
+    fun hasSuggestion(editor: Editor): Boolean {
+
+        return editor == currentEditor &&
+            currentSuggestion != null &&
+            currentInlay != null
     }
 
     fun clear() {
@@ -56,7 +79,19 @@ object InlineGhostTextRenderer {
 
         currentInlay = null
 
+        currentEditor = null
+
         currentSuggestion = null
+    }
+
+    private fun String.toInlinePreview(): String {
+
+        return lineSequence()
+            .firstOrNull {
+                it.isNotBlank()
+            }
+            ?.trimEnd()
+            ?: trim()
     }
 
     private class GhostRenderer(
@@ -84,12 +119,24 @@ object InlineGhostTextRenderer {
             textAttributes: TextAttributes
         ) {
 
+            val graphics =
+                g as? Graphics2D
+
+            graphics?.setRenderingHint(
+                RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON
+            )
+
             g.font =
                 inlay.editor.colorsScheme.getFont(
                     EditorFontType.PLAIN
                 )
 
-            g.color = Color.GRAY
+            g.color =
+                JBColor(
+                    java.awt.Color(105, 105, 105),
+                    java.awt.Color(175, 175, 175)
+                )
 
             g.drawString(
                 text,

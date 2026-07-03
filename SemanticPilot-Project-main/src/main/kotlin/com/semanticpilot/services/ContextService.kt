@@ -4,6 +4,7 @@ import com.intellij.openapi.editor.Editor
 import com.semanticpilot.context.CursorContextExtractor
 import com.semanticpilot.context.FileContextExtractor
 import com.semanticpilot.context.LanguageDetector
+import com.semanticpilot.context.SemanticContextExtractor
 import com.semanticpilot.context.SelectionContextExtractor
 import com.semanticpilot.models.CompletionRequest
 
@@ -21,7 +22,9 @@ class ContextService {
 
             language = LanguageDetector.detect(editor),
 
-            fileContent = FileContextExtractor.extract(editor)
+            fileContent = FileContextExtractor.extract(editor),
+
+            semanticContext = SemanticContextExtractor.extract(editor)
         )
     }
 }

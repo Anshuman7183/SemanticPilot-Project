@@ -1,282 +1,88 @@
-# SemanticPilot Development Roadmap
+# SemanticPilot Roadmap
 
-# Project Vision
+SemanticPilot is a resume-focused JetBrains AI coding assistant. The project demonstrates Kotlin plugin development, IntelliJ PSI, FastAPI backend integration, LLM completions, inline ghost text, TAB acceptance, and automatic completion triggering.
 
-SemanticPilot is an AI-powered coding assistant for JetBrains IDEs.
+The project is intentionally scoped for portfolio value. It is not intended to become production infrastructure.
 
-The long-term goal is to build a production-grade semantic coding assistant that combines:
+## Phase Progress
 
-- Semantic code understanding
-- Retrieval-augmented context
-- Multi-file reasoning
-- Agentic workflows
-- Ghost text completions
-- Intelligent ranking
-- Fine-tuning from user acceptance data
+## Phase 1 - Plugin Bootstrapping
 
-The architecture follows:
-
-```
-JetBrains Plugin
-        ↓
-Context Extraction
-        ↓
-Semantic Retrieval
-        ↓
-FastAPI Backend
-        ↓
-LLM Inference
-        ↓
-Candidate Ranking
-        ↓
-Ghost Text Rendering
-        ↓
-User Acceptance Feedback
-```
-
----
-
-# Technology Stack
-
-## Plugin
-
-- Kotlin
-- IntelliJ Platform SDK 2025.2
-- IntelliJ Platform Gradle Plugin 2.9
-- Kotlin Coroutines
-- Ktor Client
-- kotlinx.serialization
-
-## Backend
-
-- Python
-- FastAPI
-- Pydantic
-- Uvicorn
-
-## Future
-
-- Ollama
-- OpenAI API
-- vLLM
-- LangGraph
-- Vector Database
-- PostgreSQL
-- Redis
-
----
-
-# Current Project Structure
-
-```
-com.semanticpilot
-
-actions/
-completion/
-context/
-models/
-network/
-services/
-settings/
-startup/
-toolWindow/
-util/
-```
-
----
-
-# Development Rules
-
-## Important
-
-- Never rewrite the architecture.
-- Never change package structure without approval.
-- Fix one issue at a time.
-- Prefer minimal changes.
-- Explain all modifications.
-- Preserve compatibility with IntelliJ Platform SDK 2025.2.
-- Preserve Kotlin coroutines architecture.
-- Preserve FastAPI backend architecture.
-
----
-
-# Phase Progress
-
----
-
-## Phase 1 — Plugin Bootstrapping
-
-### Goal
-Create working IntelliJ plugin.
-
-### Status
-✅ COMPLETED
-
-### Deliverables
+Status: Completed
 
 - plugin.xml
 - startup activity
 - tool window
 - Gradle build
-- runIde working
+- runIde workflow
 
----
+## Phase 2 - Context Extraction
 
-## Phase 2 — Context Extraction
+Status: Completed
 
-### Goal
-Extract editor context.
+- cursor context
+- selection context
+- file context
+- language detection
 
-### Status
-✅ COMPLETED
+## Phase 3 - Completion Request Model
 
-### Deliverables
+Status: Completed
 
-- CursorContextExtractor
-- SelectionContextExtractor
-- FileContextExtractor
-- LanguageDetector
+- structured completion request
+- serializable completion response
 
----
+## Phase 4 - Mock Completion Pipeline
 
-## Phase 3 — Completion Request Model
-
-### Goal
-Create structured completion request.
-
-### Status
-✅ COMPLETED
-
-### Deliverables
-
-```kotlin
-CompletionRequest(
-    prefix,
-    suffix,
-    selectedText,
-    language,
-    fileContent
-)
-```
-
----
-
-## Phase 4 — Mock Completion API
-
-### Goal
-Create local completion pipeline.
-
-### Status
-⚠ PARTIALLY VERIFIED
-
-### Deliverables
+Status: Completed
 
 - CompletionApi
 - CompletionService
 - TestContextAction
-- hardcoded completion
 
-### Remaining
+## Phase 5 - Completion Pipeline
 
-- verify popup rendering
-- verify completion insertion
+Status: Completed
 
----
-
-## Phase 5 — Completion Pipeline
-
-### Goal
-Create end-to-end request flow.
-
-### Status
-✅ COMPLETED
-
-### Deliverables
-
-```
+```text
 Editor
-   ↓
-ContextService
-   ↓
-CompletionService
-   ↓
-CompletionApi
+  -> ContextService
+  -> CompletionService
+  -> CompletionApi
 ```
 
----
+## Phase 6 - Rendering Architecture
 
-## Phase 6 — Completion Rendering Architecture
+Status: Completed
 
-### Goal
-Prepare ghost rendering pipeline.
-
-### Status
-✅ COMPLETED
-
-### Deliverables
-
-- InlineGhostTextRenderer
+- renderer skeleton
 - insertion pipeline
 
----
+## Phase 7 - Ghost Text Architecture
 
-## Phase 7 — Ghost Text Rendering
+Status: Completed
 
-### Goal
-Display inline AI suggestions.
+- ghost text rendering structure
+- cleanup structure
 
-### Status
-⚠ IN PROGRESS
+## Phase 8 - Completion Acceptance Architecture
 
-### Deliverables
+Status: Completed
 
-- inline inlay rendering
-- ghost text display
-- ghost cleanup
+- TAB acceptance structure
+- insertion structure
 
----
+## Phase 9 - Automatic Trigger Architecture
 
-## Phase 8 — Accept Completion
+Status: Completed
 
-### Goal
-Accept suggestions via keyboard.
+- document listener structure
+- debounce structure
+- cancellation structure
 
-### Status
-⚠ IN PROGRESS
+## Phase 10 - Backend Integration
 
-### Deliverables
-
-- TAB acceptance
-- insertion
-- cleanup
-
----
-
-## Phase 9 — Automatic Triggering
-
-### Goal
-Trigger completions while typing.
-
-### Status
-⚠ IN PROGRESS
-
-### Deliverables
-
-- document listener
-- debounce
-- completion trigger
-
----
-
-## Phase 10 — Backend Integration
-
-### Goal
-Connect plugin to FastAPI backend.
-
-### Status
-⚠ IN PROGRESS
-
-### Deliverables
+Status: Completed
 
 - FastAPI backend
 - Swagger UI
@@ -284,138 +90,92 @@ Connect plugin to FastAPI backend.
 - coroutine networking
 - JSON serialization
 
-### Current Blocking Issue
+## Phase 11 - Real LLM Integration
 
-```
-Gradle plugin conflict:
-org.jetbrains.intellij.platform already on classpath
-```
+Status: Completed
 
----
+- Gemini API primary backend path
+- Ollama fallback path
+- mock fallback path
+- async completion pipeline
 
-## Phase 11 — Real LLM Integration
+## Phase 12 - PSI Semantic Extraction
 
-### Goal
-Replace mock completion.
+Status: Completed
 
-### Status
-⬜ NOT STARTED
+- current function extraction
+- current class extraction
+- import extraction
+- symbol extraction
+- file metadata extraction
 
-### Deliverables
+## Phase 13 - Inline Ghost Text Rendering
 
-- Ollama
-- OpenAI
-- local models
-- streaming responses
+Status: Completed
 
----
+- IntelliJ inlay renderer
+- grey inline suggestion text
+- non-persistent ghost text
+- cleanup before new suggestions
 
-## Phase 12 — PSI Semantic Extraction
+## Phase 14 - Completion Acceptance
 
-### Goal
-Understand source code semantically.
+Status: Completed
 
-### Status
-⬜ NOT STARTED
+- TAB acceptance
+- WriteCommandAction insertion
+- ghost cleanup after acceptance
 
-### Deliverables
+## Phase 15 - Automatic Completion Triggering
 
-- PSI traversal
-- function extraction
-- class extraction
-- imports
-- symbols
-- references
+Status: Completed
 
----
+- document listeners
+- debounce after typing
+- background completion requests
+- stale request cancellation/ignore path
+- automatic ghost text rendering
 
-## Phase 13 — Symbol Graph Retrieval
+## Phase 16 - Resume & Project Polish
 
-### Goal
-Build semantic retrieval.
+Status: In Progress
 
-### Status
-⬜ NOT STARTED
+- final README
+- demo guide
+- resume bullets
+- screenshots
+- demo GIF/video
 
-### Deliverables
+## Final Completion Criteria
 
-- dependency graph
-- call graph
-- cross-file retrieval
-- ranking
+- Plugin runs in JetBrains sandbox IDE
+- Backend starts locally
+- LLM completion path works with fallback
+- PSI semantic context is included in requests
+- Ghost text appears inline
+- TAB accepts visible suggestions
+- Completions trigger automatically while typing
+- Portfolio screenshots/GIF are captured
+- Resume description is finalized
 
----
+## Features Explicitly Excluded
 
-## Phase 14 — Prompt Builder
+The following features are intentionally excluded:
 
-### Goal
-Construct optimized prompts.
+- Vector databases
+- RAG
+- Redis
+- PostgreSQL
+- LangGraph
+- Multi-agent systems
+- Fine-tuning
+- DPO
+- Telemetry
+- Acceptance learning
+- Ranking models
+- Cloud deployment
+- Distributed systems
+- Enterprise features
+- Production infrastructure
 
-### Status
-⬜ NOT STARTED
-
-### Deliverables
-
-- token budget manager
-- prompt templates
-- FIM prompting
-- retrieval augmentation
-
----
-
-## Phase 15 — Production Hardening
-
-### Goal
-Make SemanticPilot production-ready.
-
-### Status
-⬜ NOT STARTED
-
-### Deliverables
-
-- cancellation
-- caching
-- telemetry
-- acceptance logging
-- reranking
-- streaming
-- DPO dataset generation
-
----
-
-# Current Priority
-
-1. Fix Gradle build system.
-2. Verify Ktor integration.
-3. Verify FastAPI communication.
-4. Verify coroutine pipeline.
-5. Fix ghost rendering.
-6. Fix TAB acceptance.
-7. Fix automatic triggering.
-
----
-
-# Instructions For Codex
-
-Before making changes:
-
-1. Explain the issue.
-2. Explain the root cause.
-3. Explain the proposed fix.
-4. List affected files.
-5. Wait for confirmation.
-
-Never:
-
-- rewrite architecture
-- rename packages
-- delete modules
-- refactor unrelated code
-- change completed phases
-
-Always:
-
-- preserve existing architecture
-- make minimal changes
-- keep code modular
-- explain decisions
+After Phase 16, development stops.

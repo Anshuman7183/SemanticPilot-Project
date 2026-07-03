@@ -20,6 +20,23 @@ repositories {
     }
 }
 
+configurations.named("runtimeClasspath") {
+    exclude(
+        group = "org.jetbrains.kotlinx",
+        module = "kotlinx-coroutines-core"
+    )
+
+    exclude(
+        group = "org.jetbrains.kotlinx",
+        module = "kotlinx-coroutines-core-jvm"
+    )
+
+    exclude(
+        group = "org.jetbrains.kotlinx",
+        module = "kotlinx-coroutines-slf4j"
+    )
+}
+
 dependencies {
 
     // ---------------------------
@@ -28,14 +45,6 @@ dependencies {
 
     testImplementation(
         "junit:junit:4.13.2"
-    )
-
-    // ---------------------------
-    // Coroutines
-    // ---------------------------
-
-    implementation(
-        "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2"
     )
 
     // ---------------------------
